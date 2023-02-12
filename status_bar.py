@@ -35,7 +35,7 @@ while True:
     battery = f"{battery_level}% {battery_icon}"
 
     wifi_status = subprocess.check_output("nmcli connection show --active | grep wifi | awk '{print $1}'", shell=True).decode()
-    wifi = ""
+    wifi = " Off"
     if wifi_status != "":
         wifi = f" {wifi_status[:-1]}"
 
