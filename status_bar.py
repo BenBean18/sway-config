@@ -39,13 +39,13 @@ while True:
     if wifi_status != "":
         wifi = f" {wifi_status[:-1]}"
 
-    brightness = "" + str(round(float(subprocess.check_output("light", shell=True).decode().rstrip("\n")), 0)) + "%"
-
+    brightness_value = int(float(subprocess.check_output("light", shell=True).decode().rstrip("\n")))
+    brightness = f" {brightness_value}%"
 
     now = datetime.now()
     current_time = datetime.strftime(now, "%B %-d, %Y %-I:%M:%S %p")
 
-    bar = f"{cpu} | {ram} | {wifi} | {battery} | {current_time}"
+    bar = f"{brightness} | {cpu} | {ram} | {wifi} | {battery} | {current_time}"
 
     print(bar, flush=True)
 
