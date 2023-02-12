@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os, psutil, time
+import subprocess, psutil, time
 from datetime import datetime
 
 while True:
@@ -21,10 +21,15 @@ while True:
     
     battery = f"{battery_level}% {battery_icon}"
 
+    wifi_status = subprocess.check_output("nmcli connection show --active | grep wifi | awk '{print $1}'", shell=True).decode()
+    wifi = "📶 🚫"
+    if wifi_status != "":
+        wifi = f"📶 {wifi_status[:-1]}"
+
     now = datetime.now()
     current_time = datetime.strftime(now, "%B %-d, %Y %-I:%M:%S %p")
 
-    bar = f"{cpu} | {ram} | {battery} | {current_time}"
+    bar = f"{cpu} | {ram} | {wifi} | {battery} | {current_time}"
 
     print(bar, flush=True)
 
