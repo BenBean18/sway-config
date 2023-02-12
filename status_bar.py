@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import subprocess, psutil, time
+import subprocess, psutil, time, re
 from datetime import datetime
 
 while True:
@@ -42,10 +42,26 @@ while True:
     brightness_value = int(float(subprocess.check_output("light", shell=True).decode().rstrip("\n")))
     brightness = f" {brightness_value}%"
 
+    sound_value = subprocess.check_output("amixer sget Master", shell=True).decode().splitlines()[-1]
+    m = re.search(r'\[\d+%\]', sound_value)
+    volume = int(m.group()[1:-2])
+    on = "[on]" in sound_value
+    sound = ""
+    if not on:
+        sound = f" {volume}%"
+    else:
+        if volume < 1:
+            sound = f" {volume}%"
+        elif volume < 50:
+            sound = f" {volume}%"
+        else:
+            sound = f" {volume}%"
+    
+
     now = datetime.now()
     current_time = datetime.strftime(now, "%B %-d, %Y %-I:%M:%S %p")
 
-    bar = f"{brightness} | {cpu} | {ram} | {wifi} | {battery} | {current_time}"
+    bar = f"{brightness} | {sound} | {cpu} | {ram} | {wifi} | {battery} | {current_time}"
 
     print(bar, flush=True)
 
