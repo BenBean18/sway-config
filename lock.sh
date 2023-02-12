@@ -25,6 +25,6 @@ swaylock --inside-color=$BLANK        \
 # #!/bin/sh
 # #if [ "${1}" == "pre" ]; then
 # #  # Do the thing you want before suspend here, e.g.:
-#   su bean /home/bean/.config/sway/lock.sh &
+#   su bean /home/bean/.config/sway/lock.sh & sleep 0.5
 # #fi
 # in /lib/systemd/system-sleep/lock.sh
