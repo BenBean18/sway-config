@@ -6,8 +6,8 @@
 
 ### Variables
 #
-# Logo key. Use Mod1 for Alt.
-set $mod Mod1
+# Logo key. Use Mod1 for Alt, Mod4 for logo
+set $mod Mod4
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -219,7 +219,7 @@ bar {
 
     gaps 8
 
-    font CascadiaCode 10
+    font CascadiaCode,"Font Awesome 6 Free Regular" 10
 }
 
 client.focused #5100dd00 #6c03ff00 #ffffff #2e9ef400 #6c03ff00
@@ -233,5 +233,8 @@ font Ubuntu Bold 10
 
 gaps outer 10
 gaps inner 10
+
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
 
 include /etc/sway/config.d/*
