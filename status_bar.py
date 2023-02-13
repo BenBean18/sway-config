@@ -34,15 +34,18 @@ while True:
     
     battery = f"{battery_level}% {battery_icon}"
 
-    wifi_status = subprocess.check_output("nmcli connection show --active | grep wifi | awk '{print $1}'", shell=True).decode()
-    wifi = " Off"
-    if wifi_status != "":
-        wifi = f" {wifi_status[:-1]}"
+    try:
+        wifi_status = subprocess.check_output("nmcli connection show --active | grep wifi", shell=True).decode().split("  ")
+        wifi = " Off"
+        if len(wifi_status) >= 1:
+            wifi = f" {wifi_status[0]}"
+    except:
+        wifi = " Off"
 
     brightness_value = int(float(subprocess.check_output("light", shell=True).decode().rstrip("\n")))
     brightness = f" {brightness_value}%"
 
-    sound_value = subprocess.check_output("amixer sget Master", shell=True).decode().splitlines()[-1]
+    sound_value = subprocess.check_output("amixer sget Master -M", shell=True).decode().splitlines()[-1]
     m = re.search(r'\[\d+%\]', sound_value)
     volume = int(m.group()[1:-2])
     on = "[on]" in sound_value
