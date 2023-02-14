@@ -2,6 +2,10 @@
 import subprocess, psutil, time, re
 from datetime import datetime
 
+avg_power_draw = []
+samples = 5
+last_energy = 0
+
 while True:
     cpu = str(psutil.cpu_percent(interval=0.25)) + "%"
 
@@ -31,8 +35,32 @@ while True:
         battery_icon = battery_level_icon
     else:
         battery_icon = "" # plug with bolt should be 
+
+    power_draw = int(open("/sys/class/power_supply/BAT0/power_now", "r").read()[:-1]) / 1000000.0 # Wh/h
+    energy_now = int(open("/sys/class/power_supply/BAT0/energy_now", "r").read()[:-1]) / 1000000.0 # Wh
+
+    if energy_now != last_energy:
+        last_energy = energy_now
+        avg_power_draw = [power_draw] + avg_power_draw
+        if len(avg_power_draw) > 5:
+            avg_power_draw.pop()
+
+    current_avg = sum(avg_power_draw) / len(avg_power_draw)
+
+    # Wh / (Wh)(h^-1) = h
+    time_left = round(energy_now / current_avg, 1)
+    battery_time = f"{time_left} hrs"
+
+    power_profile = subprocess.check_output("powerprofilesctl get", shell=True).decode().rstrip("\n ")
+    profile_icon = ""
+    if power_profile == "power-saver":
+        profile_icon = "" # leaf
+    elif power_profile == "balanced":
+        profile_icon = "" # mid gauge
+    else:
+        profile_icon = "" # high gauge
     
-    battery = f"{battery_level}% {battery_icon}"
+    battery = f"{battery_level}% {battery_icon}, {battery_time} {profile_icon}"
 
     try:
         wifi_status = subprocess.check_output("nmcli connection show --active | grep wifi", shell=True).decode().split("  ")
