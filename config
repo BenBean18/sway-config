@@ -264,4 +264,8 @@ exec foot -a terminal & && \
 
 exec wlsunset -S 07:00 -s 20:00
 
+bindsym XF86NotificationCenter exec powerprofilesctl set power-saver
+bindsym XF86PickupPhone exec powerprofilesctl set balanced
+bindsym XF86HangupPhone exec powerprofilesctl set performance
+
 include /etc/sway/config.d/*
