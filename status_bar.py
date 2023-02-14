@@ -30,7 +30,7 @@ while True:
     elif battery_status == "Discharging":
         battery_icon = battery_level_icon
     else:
-        battery_icon = ""
+        battery_icon = "" # plug with bolt should be 
     
     battery = f"{battery_level}% {battery_icon}"
 

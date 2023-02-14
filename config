@@ -262,4 +262,6 @@ exec foot -a terminal & && \
 # exec swaymsg "workspace 1; focus child; splitv"
 # exec foot -a terminal
 
+exec wlsunset -S 07:00 -s 20:00
+
 include /etc/sway/config.d/*
