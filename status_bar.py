@@ -48,7 +48,7 @@ while True:
     current_avg = sum(avg_power_draw) / len(avg_power_draw)
 
     # Wh / (Wh)(h^-1) = h
-    time_left = round(energy_now / current_avg, 1)
+    time_left = round(energy_now / current_avg, 1) if current_avg != 0 else float("inf")
     battery_time = f"{time_left} hrs"
 
     power_profile = subprocess.check_output("powerprofilesctl get", shell=True).decode().rstrip("\n ")
@@ -90,7 +90,7 @@ while True:
     
 
     now = datetime.now()
-    current_time = datetime.strftime(now, "%B %-d, %Y %-I:%M:%S %p")
+    current_time = datetime.strftime(now, "%A, %B %-d, %Y %-I:%M:%S %p")
 
     bar = f"{brightness} | {sound} | {cpu} | {ram} | {wifi} | {battery} | {current_time}"
 

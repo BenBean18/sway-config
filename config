@@ -249,7 +249,7 @@ bindsym $mod+Print exec grim -g "$(slurp)" -t png - > ~/Pictures/Screenshots/"$(
 
 assign [class="firebean"] 2
 assign [class="fireschool"] 10
-assign [app_id="gnome-control-center"] 5
+assign [app_id="gnome-control-center"] 9
 
 assign [app_id="terminal"] 1
 
