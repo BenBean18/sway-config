@@ -267,4 +267,6 @@ bindsym XF86NotificationCenter exec powerprofilesctl set power-saver
 bindsym XF86PickupPhone exec powerprofilesctl set balanced
 bindsym XF86HangupPhone exec powerprofilesctl set performance
 
+bindsym $mod+Alt+R exec /home/bean/.config/sway/screen_record.sh
+
 include /etc/sway/config.d/*

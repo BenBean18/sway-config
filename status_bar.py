@@ -88,11 +88,17 @@ while True:
         else:
             sound = f" {volume}%"
     
+    recording = ""
+    try:
+        subprocess.check_output("pgrep wf-recorder", shell=True).decode()
+        recording = " |"
+    except:
+        recording = ""
 
     now = datetime.now()
     current_time = datetime.strftime(now, "%A, %B %-d, %Y %-I:%M:%S %p")
 
-    bar = f"{brightness} | {sound} | {cpu} | {ram} | {wifi} | {battery} | {current_time}"
+    bar = f"{recording} {brightness} | {sound} | {cpu} | {ram} | {wifi} | {battery} | {current_time}"
 
     print(bar, flush=True)
 
