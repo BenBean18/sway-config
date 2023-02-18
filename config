@@ -27,7 +27,6 @@ include /etc/sway/config-vars.d/*
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 output * bg /home/bean/Desktop/backgrounds/cape_breton.png fill
-output * scale 1.1
 #
 # Example configuration:
 #
