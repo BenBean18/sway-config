@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term foot
+set $term /home/bean/.cargo/bin/alacritty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -26,7 +26,8 @@ include /etc/sway/config-vars.d/*
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/canvas_by_roytanck.jpg fill
+output * bg /home/bean/Desktop/backgrounds/cape_breton.png fill
+output * scale 1.1
 #
 # Example configuration:
 #
@@ -211,14 +212,14 @@ bar {
     # status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
     status_command /home/bean/.config/sway/status_bar.py
 
+    gaps 8
+
     colors {
         statusline #ffffff
         background #32323200
-        inactive_workspace #d60fa4 #d60fa4 #ffffff
-	focused_workspace #6c03ff #6c03ff #ffffff
+        inactive_workspace #32323236 #32323236 #ffffff
+	    focused_workspace #d72557 #d72557 #ffffff
     }
-
-    gaps 8
 
     font CascadiaCode,"Font Awesome 6 Free Regular" 10
 }
@@ -268,5 +269,7 @@ bindsym XF86PickupPhone exec powerprofilesctl set balanced
 bindsym XF86HangupPhone exec powerprofilesctl set performance
 
 bindsym $mod+Alt+R exec /home/bean/.config/sway/screen_record.sh
+
+bindsym $mod+C exec wl-color-picker
 
 include /etc/sway/config.d/*
